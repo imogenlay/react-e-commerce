@@ -1,73 +1,56 @@
-# React + TypeScript + Vite
+# React e-cShop Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Outline
 
-Currently, two official plugins are available:
+This project is designed to reinforce your React learnings and make sure that you are comfortable with most aspect of the framework.
+With this project you will practice how to:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Fetch Data within a React App
+- Use react-router
+- Use Firebase/Firestore
 
-## React Compiler
+## MVP
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+At a minimum your e-shop website should have Three pages:
 
-## Expanding the ESLint configuration
+- Home Page
+  - This will contain:
+    - A Grid of products
+    - Carousel of featured products
+- Product Page (with id parameter) Similar to a product page on another site, allows you to add to cart and select product variants
+  - All products should be stored in Firestore:
+  - You should store the following information:
+    - quantity
+    - variants (could be colors, sizes, etc)
+    - price per unit
+    - name
+    - image url
+    - favourited or not (boolean)
+      All data should be stored in Firestore and fetched by the frontend, there should be NO static product data in the react application
+- Cart
+  - A list of all products added to the user's cart and a total price
+  - You should not be able to add more items than are in stock to the cart
+  - You may want to adjust quantity of products from the Cart page
+  - You should be able to remove products from the cart
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Bonus
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- You may want to add tests with React Testing Library
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- You may want to use TypeScript (only if you feel very confident)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- Implement Stripe "Payment" with a developer account
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- TIPS :
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1. Make sure your site is scoped to one category of products
+2. When stripe is in test mode you can use `4242 4242 4242 4242` as a valid credit card number.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+**IMPORTANT** - Make sure your api key is only a test key so people can't use it to actually take payment
+
+- If stripe is too difficult a button that says "buy" which clears the cart and removes those items from qty is fine
+
+## Useful links
+
+- [React Router Docs ](https://reactrouter.com/start/declarative/installation)
+- [FireStore Docs](https://firebase.google.com/docs/firestore)
