@@ -1,0 +1,42 @@
+@use "./sass/global" as g;
+@use "./sass/mixins";
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+
+  font-family: "Lexend", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  font-synthesis: none;
+  font-size: 1rem;
+
+  color: white;
+  line-height: 1.5;
+  text-decoration: none;
+
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+
+  &::selection {
+    background-color: black;
+  }
+}
+
+html {
+  width: 100vw;
+  height: 100%;
+}
+
+body,
+#root {
+  width: 100vw;
+  height: 100vh;
+}
+
+:root {
+  --main-width: min(95vw, 80rem);
+  --inset: calc((100vw - var(--main-width)) * 0.5);
+}
