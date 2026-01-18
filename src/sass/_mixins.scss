@@ -5,3 +5,11 @@
   align-items: $align;
   gap: $gap;
 }
+
+@mixin font_color($color) {
+  color: $color;
+
+  &::selection {
+    background-color: rgb($color, 0.4);
+  }
+}

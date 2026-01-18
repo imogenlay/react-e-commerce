@@ -1,0 +1,40 @@
+@use "../../sass/global" as g;
+@use "../../sass/media-queries" as q;
+@use "../../sass/mixins";
+
+.nav {
+  position: fixed;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  height: var(--nav-bar-height);
+  background-color: green;
+
+  @include mixins.flex(row, flex-end, center, 1rem);
+
+  @include q.phone {
+    justify-content: center;
+  }
+
+  @include q.tablet {
+    justify-content: flex-start;
+  }
+
+  @include q.desktop {
+    padding: 0 var(--inset);
+    gap: 2rem;
+  }
+
+  a,
+  .fake {
+    font-size: 1.25rem;
+  }
+
+  a {
+    @include mixins.font_color(yellow);
+  }
+
+  .fake {
+    @include mixins.font_color(magenta);
+  }
+}

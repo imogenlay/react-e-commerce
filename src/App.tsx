@@ -1,27 +1,22 @@
-import { useState } from "react";
-import { BrowserRouter } from "react-router";
+import { BrowserRouter, Route, Routes } from "react-router";
+import NavBar from "./component/NavBar/NavBar";
+import HomePage from "./pages/HomePage";
+import AllProductsPage from "./pages/AllProductsPage/AllProductsPage";
+import ProductPage from "./pages/ProductPage";
+import CartPage from "./pages/CartPage";
+import Const from "./services/const";
+import "./index.scss";
 
 export default function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <BrowserRouter>
-      <div>
-        <a href="https://vite.dev" target="_blank"></a>
-        <a href="https://react.dev" target="_blank"></a>
-      </div>
-      <h1>Imogen shop</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <NavBar />
+      <Routes>
+        <Route path={Const.PAGE_HOME} element={<HomePage />} />
+        <Route path={Const.PAGE_STORE} element={<AllProductsPage />} />
+        <Route path={Const.PAGE_STORE_ID} element={<ProductPage />} />
+        <Route path={Const.PAGE_CART} element={<CartPage />} />
+      </Routes>
     </BrowserRouter>
   );
 }

@@ -13,16 +13,13 @@
   font-synthesis: none;
   font-size: 1rem;
 
-  color: white;
   line-height: 1.5;
   text-decoration: none;
 
   overflow-x: hidden;
   scroll-behavior: smooth;
 
-  &::selection {
-    background-color: black;
-  }
+  @include mixins.font_color(g.$clr-white);
 }
 
 html {
@@ -30,13 +27,23 @@ html {
   height: 100%;
 }
 
-body,
 #root {
-  width: 100vw;
-  height: 100vh;
+  background-color: g.$clr-indigo;
 }
 
 :root {
   --main-width: min(95vw, 80rem);
   --inset: calc((100vw - var(--main-width)) * 0.5);
+  --nav-bar-height: 2.5rem;
+}
+
+body,
+#root,
+main {
+  width: 100vw;
+  height: 100vh;
+}
+
+main {
+  padding: var(--nav-bar-height) var(--inset) 1rem var(--inset);
 }
