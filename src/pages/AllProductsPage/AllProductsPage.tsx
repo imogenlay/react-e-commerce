@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { getAllProducts } from "../../services/services";
 import Const from "../../services/const";
 import type { Product } from "../../services/types";
-import ProductCard from "../../component/ProductCard/ProductCard";
 import ProductList from "../../component/ProductList/ProductList";
+import { forceResetEntireCollection } from "../../services/forceReset";
 
 export default function AllProductsPage() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -26,6 +26,7 @@ export default function AllProductsPage() {
 
   return (
     <main>
+      <button onClick={forceResetEntireCollection}>Reset</button>
       <h1>Products Page</h1>
 
       {fetchStatus === Const.FETCH_SUCCESS && (

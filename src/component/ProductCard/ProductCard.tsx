@@ -1,21 +1,26 @@
 import type { Product } from "../../services/types";
 import classes from "./ProductCard.module.scss";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 interface PropsProduct {
   product: Product;
 }
 
 export default function ProductCard({ product }: PropsProduct) {
+  const navigate = useNavigate();
+
+  const llo = () => {
+    navigate(product.id);
+  };
+
   return (
-    <article
-      className={classes.a}
-      style={{ backgroundImage: `url(./assets/${product.stock[0].image})` }}
-    >
-      <div className={classes.content}>
-        <p>{product.name}</p>
-        <Link to={product.id}>See More</Link>
+    <article className={classes.card} onClick={llo}>
+      <h3>{product.name}</h3>
+      <div className={classes.img_holder}>
+        <img src={`./src/assets/${product.stock[0].image}`} />
       </div>
+      <p>{`$${product.price.toFixed(2)}`}</p>
+      <p>{"Fav: " + product.favourite}</p>
     </article>
   );
 }

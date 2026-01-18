@@ -1,0 +1,22 @@
+@use "../../sass/global" as g;
+@use "../../sass/media-queries" as q;
+@use "../../sass/mixins";
+
+.list {
+  display: grid;
+  gap: 20px;
+  overflow: visible;
+
+  @include q.phone {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  @include q.tablet {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include q.desktop {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}

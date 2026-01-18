@@ -8,6 +8,7 @@
   top: 0;
   left: 0;
   height: var(--nav-bar-height);
+  z-index: 1;
   background-color: green;
 
   @include mixins.flex(row, flex-end, center, 1rem);

@@ -32,7 +32,7 @@ html {
 }
 
 :root {
-  --main-width: min(95vw, 80rem);
+  --main-width: min(95vw, 1400px);
   --inset: calc((100vw - var(--main-width)) * 0.5);
   --nav-bar-height: 2.5rem;
 }
