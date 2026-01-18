@@ -1,14 +1,14 @@
 import Const from "../../services/const";
 import type { Product } from "../../services/types";
 import classes from "./ProductCard.module.scss";
-import { useNavigate } from "react-router";
+import { useNavigate, type NavigateFunction } from "react-router";
 
 interface PropsProduct {
   product: Product;
 }
 
 export default function ProductCard({ product }: PropsProduct) {
-  const navigate = useNavigate();
+  const navigate: NavigateFunction = useNavigate();
 
   const goToProduct = () => {
     navigate(product.id);
