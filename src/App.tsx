@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router";
 import NavBar from "./component/NavBar/NavBar";
 import HomePage from "./pages/HomePage";
 import AllProductsPage from "./pages/AllProductsPage/AllProductsPage";
-import ProductPage from "./pages/ProductPage";
+import ProductPage from "./pages/ProductPage/ProductPage";
 import CartPage from "./pages/CartPage";
 import Const from "./services/const";
 import "./index.scss";

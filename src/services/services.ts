@@ -3,7 +3,7 @@ import {
   collection,
   deleteDoc,
   doc,
-  // getDoc,
+  getDoc,
   getDocs,
   // onSnapshot,  updateDoc,
 } from "firebase/firestore";
@@ -35,6 +35,16 @@ export const createNewProduct = async (newProduct: Product) => {
   const ref = await addDoc(collectionRef, productWithoutId);
   // Return a deep copied clone with the new ID attached.
   return { id: ref.id, ...structuredClone(productWithoutId) };
+};
+
+export const getProductById = async (id: string) => {
+  const docRef = doc(database, Const.COLLECTION_NAME, id);
+  const snapshot = await getDoc(docRef);
+  if (!snapshot.exists()) {
+    throw new Error("Could not find product ID: " + id);
+  }
+
+  return { id: snapshot.id, ...snapshot.data() } as Product;
 };
 
 export const deleteProductByID = async (id: string) => {
