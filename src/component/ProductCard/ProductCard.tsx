@@ -1,5 +1,7 @@
 import Const from "../../services/const";
 import type { Product } from "../../services/types";
+import { priceFormatter } from "../../services/utils";
+import FavouriteStar from "../FavouriteStar/FavouriteStar";
 import classes from "./ProductCard.module.scss";
 import { useNavigate, type NavigateFunction } from "react-router";
 
@@ -20,8 +22,11 @@ export default function ProductCard({ product }: PropsProduct) {
       <div className={classes.img_holder}>
         <img src={`${Const.IMAGE_LOCATION}${product.stock[0].image}`} />
       </div>
-      <p>{`$${product.price.toFixed(2)}`}</p>
-      <p>{"Fav: " + product.favourite}</p>
+
+      <p>
+        {priceFormatter(product.price)}
+        <FavouriteStar isFavourite={product.favourite} />
+      </p>
     </article>
   );
 }

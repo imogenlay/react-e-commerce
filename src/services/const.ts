@@ -8,7 +8,7 @@ export default class Const {
   // Database Collection
   static readonly COLLECTION_NAME: string = "react-product-store";
   static readonly IMAGE_LOCATION: string =
-    "https://www.imogenlay.com/projects/game-kit-store/sprites/";
+    "https://www.imogenlay.com/projects/glasses-co/img/";
 
   // Fetch
   static readonly FETCH_PENDING = 0;

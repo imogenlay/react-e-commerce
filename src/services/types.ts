@@ -10,5 +10,6 @@ export interface Product {
 export interface StockItem {
   quantity: number;
   image: string;
+  color: string;
   variant: string;
 }

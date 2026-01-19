@@ -1,0 +1,48 @@
+@use "../../sass/global" as g;
+@use "../../sass/media-queries" as q;
+@use "../../sass/mixins";
+
+.stock_picker {
+  border: 1px solid black;
+  position: relative;
+  overflow: visible;
+  padding: 12px;
+  cursor: pointer;
+  @include mixins.flex(column, flex-start, center, 0);
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(135deg, #ffffff40, #ffffff00);
+  }
+
+  .variant {
+    text-wrap: nowrap;
+
+    @include q.phone {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .sold_out {
+    position: absolute;
+    text-wrap: nowrap;
+    padding: 4px;
+    line-height: 1;
+    overflow: visible;
+    user-select: none;
+    pointer-events: none;
+    background-color: red;
+
+    top: calc(1px * var(--pixel-scale));
+    right: calc(1px * var(--pixel-scale));
+
+    @include q.phone {
+      top: 0;
+      right: 0;
+      width: 100%;
+    }
+  }
+}

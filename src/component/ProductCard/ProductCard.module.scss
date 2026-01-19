@@ -16,16 +16,16 @@
 
 .img_holder {
   background: #85a643;
-  width: 128px;
-  height: 128px;
+  width: calc(20px * var(--pixel-scale));
+  height: calc(20px * var(--pixel-scale));
   overflow: hidden;
   @include mixins.flex(row, center, center, 0);
 
   img {
-    width: 96px;
-    aspect-ratio: 1 / 2;
+    width: calc(16px * var(--pixel-scale));
+    height: calc(32px * var(--pixel-scale));
     image-rendering: pixelated;
     object-fit: contain;
-    transform: translateY(-48px);
+    transform: translateY(calc(-8px * var(--pixel-scale)));
   }
 }

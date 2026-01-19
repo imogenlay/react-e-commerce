@@ -1,0 +1,22 @@
+@use "../../sass/global" as g;
+@use "../../sass/media-queries" as q;
+@use "../../sass/mixins";
+
+.sides {
+  @include mixins.flex(column, flex-start, center, 0);
+}
+
+.left_side {
+  flex: 1;
+  border: 1px red solid;
+}
+
+.right_side {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
+
+  @include q.phone {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

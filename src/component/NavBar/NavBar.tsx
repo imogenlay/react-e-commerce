@@ -11,7 +11,6 @@ export default function NavBar() {
   const { pathname } = useLocation();
 
   const navLinks: Link[] = [
-    { to: Const.PAGE_HOME, text: "Home" },
     { to: Const.PAGE_STORE, text: "Store" },
     { to: Const.PAGE_CART, text: "Cart" },
   ];

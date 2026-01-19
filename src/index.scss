@@ -1,12 +1,13 @@
 @use "./sass/global" as g;
 @use "./sass/mixins";
+@use "./sass/media-queries" as q;
 
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 
-  font-family: "Lexend", sans-serif;
+  font-family: "Zalando Sans", sans-serif;
   font-optical-sizing: auto;
   font-weight: 300;
   font-style: normal;
@@ -16,7 +17,7 @@
   line-height: 1.5;
   text-decoration: none;
 
-  overflow-x: hidden;
+  overflow-x: visible;
   scroll-behavior: smooth;
 
   @include mixins.font_color(g.$clr-white);
@@ -24,24 +25,33 @@
 
 html {
   width: 100vw;
-  height: 100%;
+  min-height: 100%;
 }
 
 #root {
-  background-color: g.$clr-indigo;
+  background-color: g.$clr-grass;
 }
 
 :root {
-  --main-width: min(95vw, 1400px);
+  --main-width: min(95vw, 1200px);
   --inset: calc((100vw - var(--main-width)) * 0.5);
   --nav-bar-height: 2.5rem;
+  --pixel-scale: 6;
+
+  @include q.tablet {
+    --pixel-scale: 5;
+  }
+
+  @include q.phone {
+    --pixel-scale: 3;
+  }
 }
 
 body,
 #root,
 main {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 main {
