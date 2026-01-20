@@ -1,0 +1,68 @@
+@use "../../sass/global" as g;
+@use "../../sass/media-queries" as q;
+@use "../../sass/mixins";
+
+.home {
+  @include mixins.flex(row, center, center, 0);
+}
+
+.title {
+  font-size: clamp(2rem, 16vw, 10rem);
+  font-weight: 600;
+  line-height: 1;
+  overflow: visible;
+  @include mixins.font_color(g.$clr-white);
+
+  transition: text-shadow 250ms ease;
+  text-shadow: 0 0 8px g.$clr-white;
+}
+
+.shadow {
+  height: 100px;
+  background: radial-gradient(
+    ellipse 100% 250% at top center,
+    #ffffffff 0%,
+    #ffffff00 40%
+  );
+  mask-image: linear-gradient(
+    to top,
+    black calc(100% - 10px),
+    transparent calc(100% - 1px)
+  );
+}
+
+.shadow_invisible {
+  opacity: 0;
+  transition: opacity 250ms ease;
+}
+
+.fit {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+
+  animation: fade 1400ms ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    .title {
+      text-shadow: 0 0 14px g.$clr-white;
+    }
+
+    .shadow_invisible {
+      opacity: 0.6;
+    }
+  }
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

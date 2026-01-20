@@ -4,6 +4,7 @@ import Const from "../../services/const";
 import type { Product } from "../../services/types";
 import ProductList from "../../component/ProductList/ProductList";
 import { forceResetEntireCollection } from "../../services/forceReset";
+import classes from "./AllProductsPage.module.scss";
 
 export default function AllProductsPage() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -27,8 +28,7 @@ export default function AllProductsPage() {
   return (
     <main>
       <button onClick={forceResetEntireCollection}>Reset</button>
-      <h1>Products Page</h1>
-
+      <h1 className={classes.heading}>Glasses Co.</h1>
       {fetchStatus === Const.FETCH_SUCCESS && (
         <ProductList products={products} />
       )}

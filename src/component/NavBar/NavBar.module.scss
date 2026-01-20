@@ -9,7 +9,7 @@
   left: 0;
   height: var(--nav-bar-height);
   z-index: 1;
-  background-color: green;
+  background-color: g.$clr-white;
 
   @include mixins.flex(row, flex-end, center, 1rem);
 
@@ -32,10 +32,11 @@
   }
 
   a {
-    @include mixins.font_color(yellow);
+    @include mixins.font_color(g.$clr-shadey);
   }
 
   .fake {
-    @include mixins.font_color(magenta);
+    @include mixins.font_color(g.$clr-turqoise);
+    font-weight: 500;
   }
 }

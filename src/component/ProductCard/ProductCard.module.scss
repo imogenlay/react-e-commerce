@@ -3,29 +3,53 @@
 @use "../../sass/mixins";
 
 .card {
-  background-color: grey;
-  @include mixins.flex(column, center, center, 1rem);
+  @include mixins.flex(column, center, center, 0.5rem);
   overflow: hidden;
-  transition: transform 100ms ease-in-out;
   cursor: pointer;
+
+  padding: 1rem 0;
+  background: g.$clr-white;
+  border-radius: 30px;
+
+  transition: all 100ms ease-in-out;
+  @include q.desktop {
+    opacity: 0.95;
+  }
 
   &:hover {
     transform: scale(1.05);
+    box-shadow: 0 0 15px 0 g.$clr-white;
+    opacity: 1;
   }
 }
 
+.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1;
+  @include mixins.font_color(g.$clr-shadey);
+}
+
 .img_holder {
-  background: #85a643;
-  width: calc(20px * var(--pixel-scale));
-  height: calc(20px * var(--pixel-scale));
+  background: g.$clr-white;
+  border-radius: 10px;
+
+  width: 80%;
+
+  @include q.tablet {
+    width: 90%;
+  }
+  @include q.phone {
+    width: 95%;
+  }
+
+  height: 7rem;
   overflow: hidden;
   @include mixins.flex(row, center, center, 0);
 
   img {
-    width: calc(16px * var(--pixel-scale));
-    height: calc(32px * var(--pixel-scale));
-    image-rendering: pixelated;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
-    transform: translateY(calc(-8px * var(--pixel-scale)));
   }
 }

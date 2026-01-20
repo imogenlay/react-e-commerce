@@ -1,0 +1,69 @@
+@use "../../sass/global" as g;
+@use "../../sass/media-queries" as q;
+@use "../../sass/mixins";
+
+.background {
+  position: fixed;
+  inset: 0;
+  background-color: g.$clr-jungle;
+  z-index: -10;
+}
+
+.background_square {
+  position: absolute;
+  left: -200px;
+  background: g.$clr-white;
+  border-radius: 30px;
+  z-index: -1;
+  animation: spinMove 20s linear infinite;
+  box-shadow: 0 0 40px 20px g.$clr-white;
+  opacity: 0.5;
+
+  &.a {
+    width: 100px;
+    height: 100px;
+    top: 50vh;
+    animation-delay: 0s;
+  }
+
+  &.b {
+    width: 100px;
+    height: 100px;
+    top: 10vh;
+    animation-duration: 20s;
+    animation-delay: -10s;
+  }
+
+  &.c {
+    width: 150px;
+    height: 150px;
+    top: 20vh;
+    animation-duration: 35s;
+    animation-delay: -20s;
+  }
+
+  &.d {
+    width: 175px;
+    height: 175px;
+    top: 80vh;
+    animation-duration: 45s;
+    animation-delay: -30s;
+  }
+
+  &.e {
+    width: 200px;
+    height: 200px;
+    top: 60vh;
+    animation-duration: 54s;
+    animation-delay: -10s;
+  }
+}
+
+@keyframes spinMove {
+  0% {
+    transform: translateX(0) rotate(0deg);
+  }
+  100% {
+    transform: translateX(calc(100vw + 400px)) rotate(calc(360deg * 4));
+  }
+}

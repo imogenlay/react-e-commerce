@@ -7,13 +7,26 @@ interface PropsProductArray {
 }
 
 export default function ProductList({ products }: PropsProductArray) {
+  const sortedProducts = products
+    .sort((a: Product, b: Product) => a.order - b.order)
+    .map((p: Product) => <ProductCard key={p.id} product={p} />);
+
+  const hasTwoSections: boolean = sortedProducts.length >= 6;
+  if (!hasTwoSections)
+    return <section className={classes.list}>{sortedProducts}</section>;
+
+  const SPLIT_INDEX = 6;
+  const splitArray = [
+    sortedProducts.slice(0, SPLIT_INDEX),
+
+    sortedProducts.slice(SPLIT_INDEX),
+  ];
   return (
     <section className={classes.list}>
-      {products
-        .sort((a: Product, b: Product) => a.order - b.order)
-        .map((p: Product) => (
-          <ProductCard key={p.id} product={p} />
-        ))}
+      <h2 className={classes.subheading}>THE JOEY COLLECTION</h2>
+      {splitArray[0]}
+      <h2 className={classes.subheading}>NEW OFF THE LINE</h2>
+      {splitArray[1]}
     </section>
   );
 }

@@ -18,7 +18,7 @@ export default function ProductCard({ product }: PropsProduct) {
 
   return (
     <article className={classes.card} onClick={goToProduct}>
-      <h3>{product.name}</h3>
+      <h3 className={classes.title}>{product.name}</h3>
       <div className={classes.img_holder}>
         <img src={`${Const.IMAGE_LOCATION}${product.stock[0].image}`} />
       </div>

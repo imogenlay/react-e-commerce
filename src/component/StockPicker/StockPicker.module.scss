@@ -36,8 +36,8 @@
     pointer-events: none;
     background-color: red;
 
-    top: calc(1px * var(--pixel-scale));
-    right: calc(1px * var(--pixel-scale));
+    top: 10px;
+    right: 10px;
 
     @include q.phone {
       top: 0;

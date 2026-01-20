@@ -9,7 +9,7 @@
 
   font-family: "Zalando Sans", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 300;
+  font-weight: 400;
   font-style: normal;
   font-synthesis: none;
   font-size: 1rem;
@@ -20,7 +20,7 @@
   overflow-x: visible;
   scroll-behavior: smooth;
 
-  @include mixins.font_color(g.$clr-white);
+  @include mixins.font_color(g.$clr-obsidian);
 }
 
 html {
@@ -28,32 +28,22 @@ html {
   min-height: 100%;
 }
 
-#root {
-  background-color: g.$clr-grass;
-}
-
 :root {
   --main-width: min(95vw, 1200px);
   --inset: calc((100vw - var(--main-width)) * 0.5);
   --nav-bar-height: 2.5rem;
-  --pixel-scale: 6;
-
-  @include q.tablet {
-    --pixel-scale: 5;
-  }
-
-  @include q.phone {
-    --pixel-scale: 3;
-  }
 }
 
 body,
-#root,
-main {
+#root {
   width: 100vw;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 main {
-  padding: var(--nav-bar-height) var(--inset) 1rem var(--inset);
+  padding: 4rem var(--inset);
+  width: 100vw;
+  min-height: 100vh;
+  /*margin-top: var(--nav-bar-height);*/
 }

@@ -6,17 +6,21 @@ import ProductPage from "./pages/ProductPage/ProductPage";
 import CartPage from "./pages/CartPage";
 import Const from "./services/const";
 import "./index.scss";
+import Background from "./component/Background/Background";
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <NavBar />
-      <Routes>
-        <Route path={Const.PAGE_HOME} element={<HomePage />} />
-        <Route path={Const.PAGE_STORE} element={<AllProductsPage />} />
-        <Route path={Const.PAGE_STORE_ID} element={<ProductPage />} />
-        <Route path={Const.PAGE_CART} element={<CartPage />} />
-      </Routes>
-    </BrowserRouter>
+    <>
+      <Background />
+      <BrowserRouter>
+        <NavBar />
+        <Routes>
+          <Route path={Const.PAGE_HOME} element={<HomePage />} />
+          <Route path={Const.PAGE_STORE} element={<AllProductsPage />} />
+          <Route path={Const.PAGE_STORE_ID} element={<ProductPage />} />
+          <Route path={Const.PAGE_CART} element={<CartPage />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
