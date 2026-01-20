@@ -28,7 +28,7 @@ export default function AllProductsPage() {
   return (
     <main>
       <button onClick={forceResetEntireCollection}>Reset</button>
-      <h1 className={classes.heading}>Glasses Co.</h1>
+      {/* <h1 className={classes.heading}>Glasses Co.</h1>*/}
       {fetchStatus === Const.FETCH_SUCCESS && (
         <ProductList products={products} />
       )}

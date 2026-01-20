@@ -13,8 +13,16 @@
   position: absolute;
   left: -200px;
   background: g.$clr-white;
+
+  background: radial-gradient(
+    circle,
+    rgb(g.$clr-white, 0.75) 0%,
+    g.$clr-white 80%
+  );
+
   border-radius: 30px;
   z-index: -1;
+
   animation: spinMove 20s linear infinite;
   box-shadow: 0 0 40px 20px g.$clr-white;
   opacity: 0.5;
@@ -54,7 +62,7 @@
     width: 200px;
     height: 200px;
     top: 60vh;
-    animation-duration: 54s;
+    animation-duration: 50s;
     animation-delay: -10s;
   }
 }

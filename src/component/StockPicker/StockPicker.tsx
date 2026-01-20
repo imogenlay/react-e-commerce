@@ -15,7 +15,9 @@ export default function StockPicker({ stock, updateVariant }: StockProps) {
       style={{ backgroundColor: "#" + stock.color }}
       onClick={updateVariant}
     >
-      {stock.quantity === 0 && <div className={classes.sold_out}>Sold Out</div>}
+      {stock.quantity === 0 && (
+        <img className={classes.sold_out} src="/slash.svg" />
+      )}
     </div>
   );
 }

@@ -1,10 +1,12 @@
+import classes from "./FavouriteStar.module.scss";
+
 interface Props {
   isFavourite: boolean;
 }
 
 export default function FavouriteStar({ isFavourite }: Props) {
-  const starEmpty = "./src/assets/favourite_star.png";
-  const star = "./src/assets/favourite_star.png";
+  const starEmpty = "/star_empty.svg";
+  const star = "/star_full.svg";
 
-  return <img src={isFavourite ? star : starEmpty} />;
+  return <img className={classes.star} src={isFavourite ? star : starEmpty} />;
 }

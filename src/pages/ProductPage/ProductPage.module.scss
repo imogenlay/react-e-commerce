@@ -3,20 +3,86 @@
 @use "../../sass/mixins";
 
 .sides {
-  @include mixins.flex(column, flex-start, center, 0);
-}
+  @include mixins.flex(column-reverse, flex-start, flex-start, 10px);
+  padding: 2rem 0;
+  width: 100%;
 
-.left_side {
-  flex: 1;
-  border: 1px red solid;
-}
-
-.right_side {
-  display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(3, 1fr);
-
-  @include q.phone {
-    grid-template-columns: repeat(2, 1fr);
+  @include q.desktop {
+    flex-direction: row;
+    padding: 2rem;
+    gap: 4rem;
   }
+}
+
+.information {
+  flex: 1;
+  width: 100%;
+  @include mixins.flex(column, flex-start, flex-start, 10px);
+
+  @include q.desktop {
+    @include mixins.flex(row, flex-start, flex-start, 10px);
+  }
+}
+
+.header_group {
+  flex: 1;
+  width: 100%;
+
+  @include q.tablet {
+    padding-top: 1rem;
+  }
+  @include q.phone {
+    padding-top: 1rem;
+  }
+
+  .title,
+  .stock_title {
+    @include mixins.font_color(g.$clr-white);
+    line-height: 1.25;
+  }
+
+  .title {
+    font-weight: 600;
+    padding-right: 1rem;
+    font-size: clamp(1.5rem, 7vw, 3rem);
+  }
+
+  .stock_title {
+    font-size: clamp(1.25rem, 5vw, 2rem);
+  }
+
+  hr {
+    margin: 0.5rem 0;
+    border: none;
+    height: 2px;
+    background: g.$clr-white;
+  }
+}
+
+.price_group {
+  padding-right: 2rem;
+  min-width: 15rem;
+
+  @include q.desktop {
+    padding-top: 1rem;
+  }
+
+  .price {
+    @include mixins.font_color(g.$clr-white);
+    font-size: clamp(1.25rem, 5vw, 2rem);
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .stock_remaining {
+    @include mixins.font_color(g.$clr-white);
+    font-size: clamp(1rem, 3vw, 1.25rem);
+    font-weight: 500;
+    text-wrap: nowrap;
+  }
+}
+
+.stocks {
+  @include mixins.flex(row, flex-start, center, 10px);
+  flex-wrap: wrap;
 }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 import { getProductById } from "../../services/services";
 import Const from "../../services/const.ts";
 import classes from "./ProductPage.module.scss";
@@ -7,6 +7,7 @@ import type { Product, StockItem } from "../../services/types.ts";
 import StockPicker from "../../component/StockPicker/StockPicker.tsx";
 import { priceFormatter } from "../../services/utils.ts";
 import FavouriteStar from "../../component/FavouriteStar/FavouriteStar.tsx";
+import Carousel from "../../component/Carousel/Carousel.tsx";
 
 export default function ProductPage() {
   const [product, setProduct] = useState<Product | null>(null);
@@ -37,31 +38,52 @@ export default function ProductPage() {
       });
   }, [id]);
 
+  if (!product || fetchStatus !== Const.FETCH_SUCCESS) return <main />;
+
+  const variantNames: string[] = product.stock.map(
+    (s) => Const.IMAGE_LOCATION + s.image,
+  );
+
+  const getStockText = () => {
+    const currentStockQuantity = product.stock[selectedVariant].quantity;
+    if (currentStockQuantity < 1) return "Out of Stock";
+    if (currentStockQuantity < 2) return "Only 1 remaining";
+    return currentStockQuantity + " stock remaining";
+  };
+
   return (
     <main>
-      {product && (
-        <div className={classes.sides}>
-          <div className={classes.left_side}>
-            <img
-              src={`${Const.IMAGE_LOCATION}${product.stock[selectedVariant].image}`}
-            />
-            <h1>{product.name}</h1>
-            <p>{priceFormatter(product.price)}</p>
-            <p>Stock remaining: {product.stock[selectedVariant].quantity}</p>
+      <Carousel
+        updateCarouselIndex={updateVariant}
+        currentIndex={selectedVariant}
+        items={variantNames}
+      />
+      <div className={classes.sides}>
+        <div className={classes.information}>
+          <hgroup className={classes.header_group}>
+            <h1 className={classes.title}>{product.name}</h1>
+            <h1 className={classes.stock_title}>
+              {product.stock[selectedVariant].variant}
+            </h1>
+            <hr />
             <FavouriteStar isFavourite={product.favourite} />
-          </div>
-          <div className={classes.right_side}>
-            {fetchStatus === Const.FETCH_SUCCESS &&
-              product.stock.map((s: StockItem, i: number) => (
-                <StockPicker
-                  key={s.variant}
-                  stock={s}
-                  updateVariant={() => updateVariant(i)}
-                />
-              ))}
+          </hgroup>
+          <div className={classes.price_group}>
+            <p className={classes.price}>{priceFormatter(product.price)}</p>
+            <p className={classes.stock_remaining}>{getStockText()}</p>
           </div>
         </div>
-      )}
+
+        <div className={classes.stocks}>
+          {product.stock.map((s: StockItem, i: number) => (
+            <StockPicker
+              key={s.variant}
+              stock={s}
+              updateVariant={() => updateVariant(i)}
+            />
+          ))}
+        </div>
+      </div>
     </main>
   );
 }

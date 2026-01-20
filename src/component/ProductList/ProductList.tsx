@@ -25,7 +25,7 @@ export default function ProductList({ products }: PropsProductArray) {
     <section className={classes.list}>
       <h2 className={classes.subheading}>THE JOEY COLLECTION</h2>
       {splitArray[0]}
-      <h2 className={classes.subheading}>NEW OFF THE LINE</h2>
+      <h2 className={classes.subheading}>NEW ON THE RACK</h2>
       {splitArray[1]}
     </section>
   );

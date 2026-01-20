@@ -6,43 +6,34 @@
   border: 1px solid black;
   position: relative;
   overflow: visible;
-  padding: 12px;
   cursor: pointer;
-  @include mixins.flex(column, flex-start, center, 0);
+
+  width: 48px;
+  height: 48px;
+
+  border-radius: 10px;
+  @include mixins.flex(row, center, center, 0);
 
   &::after {
     content: "";
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background: linear-gradient(135deg, #ffffff40, #ffffff00);
+    background: linear-gradient(135deg, #ffffff90, #ffffff00);
+    border-radius: 10px;
   }
 
-  .variant {
-    text-wrap: nowrap;
-
-    @include q.phone {
-      grid-template-columns: repeat(2, 1fr);
-    }
+  &:hover::after {
+    background: linear-gradient(135deg, #ffffffc0, #ffffff40);
   }
 
   .sold_out {
     position: absolute;
-    text-wrap: nowrap;
-    padding: 4px;
-    line-height: 1;
-    overflow: visible;
+    width: 100%;
+    height: 100%;
     user-select: none;
     pointer-events: none;
-    background-color: red;
 
-    top: 10px;
-    right: 10px;
-
-    @include q.phone {
-      top: 0;
-      right: 0;
-      width: 100%;
-    }
+    z-index: 1;
   }
 }

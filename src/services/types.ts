@@ -13,3 +13,7 @@ export interface StockItem {
   color: string;
   variant: string;
 }
+
+export interface CarouselItem {
+  image: string;
+}
