@@ -9,7 +9,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { database } from "../config/firestore.ts";
-import type { Cart, Product } from "./types.ts";
+import type { Cart, CartItem, Product } from "./types.ts";
 import Const from "./const.ts";
 
 const getAllOfDocumentType = async (documentType: string) => {
@@ -101,4 +101,70 @@ export const updateCartDocument = async (cart: Cart) => {
 
 export const createProductStockID = (product: Product, stock: number) => {
   return product.id + "~" + stock;
+};
+
+export const readProductStockID = (cartItem: CartItem) => {
+  const split = cartItem.productStockID.split("~");
+  return {
+    productID: split[0],
+    stockIndex: parseInt(split[1]),
+  };
+};
+
+export const addItemToCart = async (cartItem: CartItem) => {
+  const prevCart = await getCartDocument();
+  const updatedCart = { ...prevCart };
+  let wasInCart = false;
+  console.log(updatedCart);
+  // This function will return the new cart
+  // amount and the maximum possible.
+
+  for (let i = 0; i < updatedCart.cartItems.length; i++) {
+    const nextCartItem = updatedCart.cartItems[i];
+    if (nextCartItem.productStockID === cartItem.productStockID) {
+      nextCartItem.count += cartItem.count;
+      wasInCart = true;
+      break;
+    }
+  }
+
+  // If item was not in cart then just add it.
+  if (!wasInCart) {
+    updatedCart.cartItems.push(cartItem);
+  }
+
+  updatedCart.cartItems = updatedCart.cartItems.filter(
+    // Filter out all items that have 0 or less count.
+    (cartItem: CartItem) => cartItem.count > 0,
+  );
+  const cartCountReport = {
+    current: 0,
+    maximum: 0,
+  };
+
+  // Asynchonously validate all the items in the cart.
+  updatedCart.cartItems = await Promise.all(
+    updatedCart.cartItems.map(async (ci: CartItem) => {
+      // Check to see if we have too many of this item in the cart.
+      const itemIDs = readProductStockID(ci);
+
+      const productData = await getProductById(itemIDs.productID);
+      const maxQuantity = productData.stock[itemIDs.stockIndex].quantity;
+      if (ci.count > maxQuantity) {
+        ci.count = maxQuantity;
+      }
+      if (ci.productStockID === cartItem.productStockID) {
+        cartCountReport.current = ci.count;
+        cartCountReport.maximum = maxQuantity;
+      }
+
+      return ci;
+    }),
+  );
+
+  // Update cart data.
+  console.log("Cart Items: ", updatedCart.cartItems);
+  await updateCartDocument(updatedCart);
+
+  return cartCountReport;
 };

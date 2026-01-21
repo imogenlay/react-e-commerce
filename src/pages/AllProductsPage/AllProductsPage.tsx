@@ -5,7 +5,6 @@ import ProductList from "../../component/ProductList/ProductList";
 import { forceResetEntireCollection } from "../../services/forceReset";
 import Carousel from "../../component/Carousel/Carousel";
 import { getAllProducts } from "../../services/services";
-import { useCart } from "../../component/CartContext/CartContextProvider";
 
 export default function AllProductsPage() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -13,7 +12,6 @@ export default function AllProductsPage() {
   const [error, setError] = useState(null);
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [carouselImages, setCarouselImages] = useState<string[]>([]);
-  const { resetCart } = useCart();
 
   useEffect(() => {
     setFetchStatus(Const.FETCH_LOADING);
@@ -38,15 +36,10 @@ export default function AllProductsPage() {
       });
   }, []);
 
-  const majorReset = async () => {
-    await forceResetEntireCollection();
-    resetCart();
-  };
-
   if (fetchStatus !== Const.FETCH_SUCCESS)
     return (
       <main>
-        <button onClick={majorReset}>Reset</button>
+        <button onClick={forceResetEntireCollection}>Reset</button>
       </main>
     );
 

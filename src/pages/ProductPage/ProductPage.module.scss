@@ -73,13 +73,13 @@
     font-weight: 700;
     line-height: 1;
   }
+}
 
-  .stock_remaining {
-    @include mixins.font_color(g.$clr-white);
-    font-size: clamp(1rem, 3vw, 1.25rem);
-    font-weight: 500;
-    text-wrap: nowrap;
-  }
+.stock_remaining {
+  @include mixins.font_color(g.$clr-white);
+  font-size: clamp(1rem, 3vw, 1.25rem);
+  font-weight: 500;
+  text-wrap: nowrap;
 }
 
 .stocks {
@@ -91,4 +91,24 @@
 
   width: 200px;
   flex-wrap: wrap;
+}
+
+.button_group {
+  @include mixins.flex(row, flex-start, center, 30px);
+
+  .add_button {
+    border: g.$clr-white solid 2px;
+    background-color: rgb(g.$clr-white, 0.5);
+    padding: 10px;
+    border-radius: 10px;
+    @include mixins.font_color(g.$clr-shadey);
+
+    &:hover {
+      background-color: rgb(g.$clr-white, 0.7);
+    }
+
+    &:active {
+      background-color: rgb(g.$clr-white, 0.9);
+    }
+  }
 }

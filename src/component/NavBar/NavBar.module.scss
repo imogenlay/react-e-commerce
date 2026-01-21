@@ -11,19 +11,14 @@
   z-index: 1;
   background-color: g.$clr-white;
 
-  @include mixins.flex(row, flex-end, center, 1rem);
+  @include mixins.flex(row, center, center, 3rem);
 
   @include q.phone {
-    justify-content: center;
-  }
-
-  @include q.tablet {
-    justify-content: flex-start;
+    gap: 1rem;
   }
 
   @include q.desktop {
     padding: 0 var(--inset);
-    gap: 2rem;
   }
 
   a,

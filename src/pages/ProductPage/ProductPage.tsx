@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import {
+  addItemToCart,
   createProductStockID,
   getProductById,
   updateProductById,
@@ -12,17 +13,16 @@ import StockPicker from "../../component/StockPicker/StockPicker.tsx";
 import { priceFormatter } from "../../services/utils.ts";
 import FavouriteStar from "../../component/FavouriteStar/FavouriteStar.tsx";
 import Carousel from "../../component/Carousel/Carousel.tsx";
-import { useCart } from "../../component/CartContext/CartContextProvider.tsx";
 
 export default function ProductPage() {
   const [product, setProduct] = useState<Product | null>(null);
   const [fetchStatus, setFetchStatus] = useState(Const.FETCH_PENDING);
   const [error, setError] = useState(null);
   const [selectedVariant, setSelectedVariant] = useState(0);
+  const [maxStockReached, setMaxStockReached] = useState(false);
   const { id } = useParams();
-  const { cart, addToCart, removeFromCart, resetCart } = useCart();
 
-  const addItemToCart = () => {
+  const addItem = async () => {
     if (product === null) return;
 
     const productStockID = createProductStockID(product, selectedVariant);
@@ -31,10 +31,14 @@ export default function ProductPage() {
       count: 1,
       price: product.price,
     };
-    addToCart(cartItem);
+
+    const cartCountReport = await addItemToCart(cartItem);
+    console.log(cartCountReport);
+    setMaxStockReached(cartCountReport.current >= cartCountReport.maximum);
   };
 
   const updateVariant = (index: number) => {
+    setMaxStockReached(false);
     setSelectedVariant(index);
   };
 
@@ -64,6 +68,8 @@ export default function ProductPage() {
       });
   }, [id]);
 
+  if (error) return <main>{error}</main>;
+
   if (!product || fetchStatus !== Const.FETCH_SUCCESS) return <main />;
 
   const variantNames: string[] = product.stock.map((s) => s.image);
@@ -90,12 +96,21 @@ export default function ProductPage() {
               {product.stock[selectedVariant].variant}
             </h1>
             <hr />
-            <FavouriteStar
-              isFavourite={product.favourite}
-              isEnabled={true}
-              updateFavourite={updateFavourite}
-            />
-            <button onClick={addItemToCart}>Add to cart</button>
+            <div className={classes.button_group}>
+              <FavouriteStar
+                isFavourite={product.favourite}
+                isEnabled={true}
+                updateFavourite={updateFavourite}
+              />
+              <button className={classes.add_button} onClick={addItem}>
+                Add to cart
+              </button>
+              {maxStockReached && (
+                <p className={classes.stock_remaining}>
+                  All stock are in cart.
+                </p>
+              )}
+            </div>
           </hgroup>
           <div className={classes.price_group}>
             <p className={classes.price}>{priceFormatter(product.price)}</p>
