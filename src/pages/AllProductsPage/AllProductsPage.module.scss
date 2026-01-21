@@ -32,3 +32,8 @@
     background-color: rgb(g.$clr-white, 0.9);
   }
 }
+
+.debug {
+  @include mixins.flex(column, center, center, 1rem);
+  padding: 1rem 20%;
+}

@@ -7,11 +7,7 @@ import {
   forceResetEntireCollection,
 } from "../../services/forceReset";
 import Carousel from "../../component/Carousel/Carousel";
-import {
-  deleteDocumentByID,
-  getAllProducts,
-  purchaseCart,
-} from "../../services/services";
+import { deleteDocumentByID, getAllProducts } from "../../services/services";
 import classes from "./AllProductsPage.module.scss";
 import { useNavigate } from "react-router";
 
@@ -73,8 +69,14 @@ export default function AllProductsPage() {
 
   return (
     <main>
+      <Carousel
+        updateCarouselIndex={updateCarouselIndex}
+        currentIndex={carouselIndex}
+        items={carouselImages}
+      />
+      <ProductList products={products} />
       {showDebugButtons && (
-        <>
+        <div className={classes.debug}>
           <button
             className={classes.restock}
             onClick={() => restock(forceResetEntireCollection)}
@@ -86,15 +88,9 @@ export default function AllProductsPage() {
             onClick={() => restock(deleteEntireCollection)}
           >
             Delete
-          </button>
-        </>
+          </button>{" "}
+        </div>
       )}
-      <Carousel
-        updateCarouselIndex={updateCarouselIndex}
-        currentIndex={carouselIndex}
-        items={carouselImages}
-      />
-      <ProductList products={products} />
     </main>
   );
 }
