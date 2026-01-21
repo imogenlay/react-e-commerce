@@ -37,7 +37,12 @@ export default function AllProductsPage() {
       });
   }, []);
 
-  if (fetchStatus !== Const.FETCH_SUCCESS) return <main />;
+  if (fetchStatus !== Const.FETCH_SUCCESS)
+    return (
+      <main>
+        <button onClick={forceResetEntireCollection}>Reset</button>
+      </main>
+    );
 
   const updateCarouselIndex = (index: number) => {
     setCarouselIndex(index);

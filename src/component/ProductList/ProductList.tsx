@@ -3,11 +3,11 @@ import type { Product } from "../../services/types";
 import ProductCard from "../ProductCard/ProductCard";
 import classes from "./ProductList.module.scss";
 
-interface PropsProductArray {
+interface Props {
   products: Product[];
 }
 
-export default function ProductList({ products }: PropsProductArray) {
+export default function ProductList({ products }: Props) {
   // Split products into chunks of 6.
   const chunks = [];
   for (let i = 0; i < products.length / Const.CHUNK_SIZE; i++) {
@@ -19,8 +19,8 @@ export default function ProductList({ products }: PropsProductArray) {
   const headings = [
     "FEATURED",
     "THE JOEY COLLECTION",
-    "FINAL MATCHUP FROM SPARK",
     "NEW ON THE RACK",
+    "FINAL MATCHUP FROM SPARK",
     "SELLING FAST",
     "SELLING FASTER",
   ];

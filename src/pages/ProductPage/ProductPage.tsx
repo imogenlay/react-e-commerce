@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { getProductById } from "../../services/services";
+import { getProductById, updateProductById } from "../../services/services";
 import Const from "../../services/const.ts";
 import classes from "./ProductPage.module.scss";
 import type { Product, StockItem } from "../../services/types.ts";
@@ -18,6 +18,14 @@ export default function ProductPage() {
 
   const updateVariant = (index: number) => {
     setSelectedVariant(index);
+  };
+
+  const updateFavourite = () => {
+    if (product === null) return;
+
+    const newProduct: Product = { ...product, favourite: !product?.favourite };
+    updateProductById(newProduct);
+    setProduct(newProduct);
   };
 
   useEffect(() => {
@@ -64,7 +72,10 @@ export default function ProductPage() {
               {product.stock[selectedVariant].variant}
             </h1>
             <hr />
-            <FavouriteStar isFavourite={product.favourite} />
+            <FavouriteStar
+              isFavourite={product.favourite}
+              updateFavourite={updateFavourite}
+            />
           </hgroup>
           <div className={classes.price_group}>
             <p className={classes.price}>{priceFormatter(product.price)}</p>

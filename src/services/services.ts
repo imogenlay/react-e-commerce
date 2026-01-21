@@ -5,7 +5,7 @@ import {
   doc,
   getDoc,
   getDocs,
-  // onSnapshot,  updateDoc,
+  updateDoc,
 } from "firebase/firestore";
 import { database } from "../config/firestore.ts";
 import type { Product } from "./types.ts";
@@ -50,4 +50,11 @@ export const getProductById = async (id: string) => {
 export const deleteProductByID = async (id: string) => {
   const docRef = doc(database, Const.COLLECTION_NAME, id);
   await deleteDoc(docRef);
+};
+
+export const updateProductById = async (product: Product) => {
+  const docRef = doc(database, Const.COLLECTION_NAME, product.id);
+  const { id, ...productWithoutId } = product;
+  await updateDoc(docRef, productWithoutId);
+  return id;
 };

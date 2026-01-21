@@ -55,6 +55,7 @@
 }
 
 .price {
+  @include mixins.flex(row, center, center, 1rem);
   font-size: 1.5rem;
   font-weight: 500;
 }
