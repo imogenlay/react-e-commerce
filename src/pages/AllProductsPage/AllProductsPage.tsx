@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import { getAllProducts } from "../../services/services";
 import Const from "../../services/const";
 import type { Product } from "../../services/types";
 import ProductList from "../../component/ProductList/ProductList";
 import { forceResetEntireCollection } from "../../services/forceReset";
-import classes from "./AllProductsPage.module.scss";
 import Carousel from "../../component/Carousel/Carousel";
+import { getAllProducts } from "../../services/services";
 
 export default function AllProductsPage() {
   const [products, setProducts] = useState<Product[]>([]);

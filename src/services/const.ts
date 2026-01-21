@@ -3,6 +3,7 @@ export default class Const {
   static readonly PAGE_HOME: string = "/";
   static readonly PAGE_STORE: string = "/store";
   static readonly PAGE_STORE_ID: string = "/store/:id";
+  static readonly PAGE_CART_ID: string = "/store/cart";
   static readonly PAGE_CART: string = "/cart";
 
   // Database Collection
@@ -15,6 +16,10 @@ export default class Const {
   static readonly FETCH_LOADING = 1;
   static readonly FETCH_SUCCESS = 2;
   static readonly FETCH_FAILURE = 3;
+
+  static readonly DOC_TYPE_PROD = "_prod";
+  static readonly DOC_TYPE_CART = "_cart";
+  static readonly CART_ID = "cart";
 
   // Display
   static readonly CHUNK_SIZE = 6;

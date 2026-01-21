@@ -1,13 +1,18 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { getProductById, updateProductById } from "../../services/services";
+import {
+  createProductStockID,
+  getProductById,
+  updateProductById,
+} from "../../services/services";
 import Const from "../../services/const.ts";
 import classes from "./ProductPage.module.scss";
-import type { Product, StockItem } from "../../services/types.ts";
+import type { CartItem, Product, StockItem } from "../../services/types.ts";
 import StockPicker from "../../component/StockPicker/StockPicker.tsx";
 import { priceFormatter } from "../../services/utils.ts";
 import FavouriteStar from "../../component/FavouriteStar/FavouriteStar.tsx";
 import Carousel from "../../component/Carousel/Carousel.tsx";
+import { useCart } from "../../component/CartContext/CartContextProvider.tsx";
 
 export default function ProductPage() {
   const [product, setProduct] = useState<Product | null>(null);
@@ -15,6 +20,19 @@ export default function ProductPage() {
   const [error, setError] = useState(null);
   const [selectedVariant, setSelectedVariant] = useState(0);
   const { id } = useParams();
+  const { cart, addToCart, removeFromCart } = useCart();
+
+  const addItemToCart = () => {
+    if (product === null) return;
+
+    const productStockID = createProductStockID(product, selectedVariant);
+    const cartItem: CartItem = {
+      productStockID,
+      count: 1,
+      price: product.price,
+    };
+    addToCart(cartItem);
+  };
 
   const updateVariant = (index: number) => {
     setSelectedVariant(index);
@@ -77,6 +95,7 @@ export default function ProductPage() {
               isEnabled={true}
               updateFavourite={updateFavourite}
             />
+            <button onClick={addItemToCart}>Add to cart</button>
           </hgroup>
           <div className={classes.price_group}>
             <p className={classes.price}>{priceFormatter(product.price)}</p>

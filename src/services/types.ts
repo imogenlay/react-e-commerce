@@ -1,4 +1,5 @@
 export interface Product {
+  documentType: string;
   id: string;
   name: string;
   price: number;
@@ -14,6 +15,14 @@ export interface StockItem {
   variant: string;
 }
 
-export interface CarouselItem {
-  image: string;
+export interface Cart {
+  id: string;
+  documentType: string;
+  cartItems: CartItem[];
+}
+
+export interface CartItem {
+  productStockID: string;
+  count: number;
+  price: number;
 }

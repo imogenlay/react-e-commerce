@@ -29,6 +29,9 @@ export default function Carousel({
       left: (i - currentIndex) * 100 + "%",
     });
 
+  const showLeftButton = currentIndex > 0;
+  const showRightButton = currentIndex < items.length - 1;
+
   return (
     <div className={classes.carousel}>
       <div className={classes.center}>
@@ -37,7 +40,6 @@ export default function Carousel({
             <div
               key={item}
               className={classes.img_container}
-              onClick={() => moveToIndex(i)}
               style={generateOffset(i)}
             >
               <img src={Const.IMAGE_LOCATION + item} />
@@ -45,17 +47,18 @@ export default function Carousel({
           );
         })}
       </div>
-      {items.length > 1 && (
-        <>
-          <CarouselButton
-            moveToIndex={() => moveToIndex(currentIndex - 1)}
-            left={true}
-          />
-          <CarouselButton
-            moveToIndex={() => moveToIndex(currentIndex + 1)}
-            left={false}
-          />
-        </>
+      {showLeftButton && (
+        <CarouselButton
+          moveToIndex={() => moveToIndex(currentIndex - 1)}
+          left={true}
+        />
+      )}
+
+      {showRightButton && (
+        <CarouselButton
+          moveToIndex={() => moveToIndex(currentIndex + 1)}
+          left={false}
+        />
       )}
     </div>
   );
