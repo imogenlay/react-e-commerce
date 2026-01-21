@@ -25,7 +25,13 @@ export default function ProductCard({ product }: PropsProduct) {
 
       <p className={classes.price}>
         {priceFormatter(product.price)}
-        {product.favourite && <FavouriteStar isFavourite={product.favourite} />}
+        {product.favourite && (
+          <FavouriteStar
+            isFavourite={product.favourite}
+            isEnabled={false}
+            updateFavourite={() => {}}
+          />
+        )}
       </p>
     </article>
   );

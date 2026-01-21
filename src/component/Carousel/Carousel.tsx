@@ -15,9 +15,11 @@ export default function Carousel({
 }: Props) {
   // Change index of carousel. Position will be stored in parent state.
   const moveToIndex = (newIndex: number) => {
-    if (newIndex < 0) updateCarouselIndex(items.length - 1);
+    /*if (newIndex < 0) updateCarouselIndex(items.length - 1);
     else if (newIndex >= items.length) updateCarouselIndex(0);
-    else updateCarouselIndex(newIndex);
+    else updateCarouselIndex(newIndex);*/
+
+    if (newIndex >= 0 && newIndex < items.length) updateCarouselIndex(newIndex);
   };
 
   const generateOffset = (i: number) =>

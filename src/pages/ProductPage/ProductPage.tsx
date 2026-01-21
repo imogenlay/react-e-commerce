@@ -74,6 +74,7 @@ export default function ProductPage() {
             <hr />
             <FavouriteStar
               isFavourite={product.favourite}
+              isEnabled={true}
               updateFavourite={updateFavourite}
             />
           </hgroup>

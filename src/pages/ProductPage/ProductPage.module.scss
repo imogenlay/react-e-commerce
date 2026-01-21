@@ -83,7 +83,12 @@
 }
 
 .stocks {
-  @include mixins.flex(row, flex-end, center, 10px);
+  @include mixins.flex(row, flex-start, center, 10px);
+
+  @include q.desktop {
+    justify-content: flex-end;
+  }
+
   width: 200px;
   flex-wrap: wrap;
 }
