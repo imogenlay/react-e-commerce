@@ -9,7 +9,6 @@ import { getAllProducts } from "../../services/services";
 export default function AllProductsPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [fetchStatus, setFetchStatus] = useState(Const.FETCH_PENDING);
-  const [error, setError] = useState(null);
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [carouselImages, setCarouselImages] = useState<string[]>([]);
 
@@ -30,8 +29,7 @@ export default function AllProductsPage() {
 
         setCarouselImages(carousel);
       })
-      .catch((e) => {
-        setError(e);
+      .catch(() => {
         setFetchStatus(Const.FETCH_FAILURE);
       });
   }, []);

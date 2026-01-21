@@ -1,4 +1,4 @@
-import { NavLink, useLocation, useParams } from "react-router";
+import { NavLink, useLocation } from "react-router";
 import Const from "../../services/const.ts";
 import classes from "./NavBar.module.scss";
 

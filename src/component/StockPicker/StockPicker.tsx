@@ -1,4 +1,3 @@
-import Const from "../../services/const";
 import type { StockItem } from "../../services/types";
 import classes from "./StockPicker.module.scss";
 
