@@ -7,8 +7,6 @@ The project demonstrates end-to-end frontend architecture, real-time data handli
 
 ---
 
-## Features
-
 ### Home Page
 
 - Featured products carousel
