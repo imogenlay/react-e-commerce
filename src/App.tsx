@@ -3,7 +3,7 @@ import NavBar from "./component/NavBar/NavBar";
 import HomePage from "./pages/HomePage/HomePage";
 import AllProductsPage from "./pages/AllProductsPage/AllProductsPage";
 import ProductPage from "./pages/ProductPage/ProductPage";
-import CartPage from "./pages/CartPage";
+import CartPage from "./pages/CartPage/CartPage";
 import Const from "./services/const";
 import "./index.scss";
 import Background from "./component/Background/Background";

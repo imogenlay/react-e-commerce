@@ -5,6 +5,7 @@ import {
   doc,
   getDoc,
   getDocs,
+  onSnapshot,
   setDoc,
   updateDoc,
 } from "firebase/firestore";
@@ -99,8 +100,8 @@ export const updateCartDocument = async (cart: Cart) => {
   return id;
 };
 
-export const createProductStockID = (product: Product, stock: number) => {
-  return product.id + "~" + stock;
+export const createProductStockID = (productID: string, stock: number) => {
+  return productID + "~" + stock;
 };
 
 export const readProductStockID = (cartItem: CartItem) => {
@@ -115,7 +116,6 @@ export const addItemToCart = async (cartItem: CartItem) => {
   const prevCart = await getCartDocument();
   const updatedCart = { ...prevCart };
   let wasInCart = false;
-  console.log(updatedCart);
   // This function will return the new cart
   // amount and the maximum possible.
 
@@ -133,10 +133,6 @@ export const addItemToCart = async (cartItem: CartItem) => {
     updatedCart.cartItems.push(cartItem);
   }
 
-  updatedCart.cartItems = updatedCart.cartItems.filter(
-    // Filter out all items that have 0 or less count.
-    (cartItem: CartItem) => cartItem.count > 0,
-  );
   const cartCountReport = {
     current: 0,
     maximum: 0,
@@ -162,9 +158,35 @@ export const addItemToCart = async (cartItem: CartItem) => {
     }),
   );
 
+  updatedCart.cartItems = updatedCart.cartItems.filter(
+    // Filter out all items that have 0 or less.
+    (cartItem: CartItem) => cartItem.count > 0,
+  );
+
   // Update cart data.
-  console.log("Cart Items: ", updatedCart.cartItems);
+  //console.log("Cart Items: ", updatedCart.cartItems);
   await updateCartDocument(updatedCart);
 
   return cartCountReport;
+};
+
+export const createPlaceHolderCart = () => {
+  return {
+    id: Const.CART_ID,
+    documentType: Const.DOC_TYPE_CART,
+    cartItems: [],
+  } as Cart;
+};
+
+export const subscribeToCart = (
+  callback: React.Dispatch<React.SetStateAction<Cart>>,
+) => {
+  const docRef = doc(database, Const.COLLECTION_NAME, Const.CART_ID);
+
+  const unsub = onSnapshot(docRef, (snapshot) => {
+    if (!snapshot.exists()) return;
+    callback({ id: snapshot.id, ...snapshot.data() } as Cart);
+  });
+
+  return unsub;
 };

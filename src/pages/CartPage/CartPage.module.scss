@@ -1,0 +1,50 @@
+@use "../../sass/global" as g;
+@use "../../sass/media-queries" as q;
+@use "../../sass/mixins";
+
+.title {
+  text-align: center;
+  font-size: clamp(2rem, 10vw, 4rem);
+  font-weight: 600;
+  line-height: 1;
+  overflow: visible;
+  @include mixins.font_color(g.$clr-white);
+
+  padding: 1rem 0;
+  grid-column: 1 / -1;
+}
+
+.all_elements {
+  width: var(--main-width);
+}
+
+.price {
+  @include mixins.font_color(g.$clr-white);
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1;
+  padding-left: calc(1rem + 50%);
+
+  @include q.phone {
+    padding-left: calc(0.5rem + 50%);
+  }
+}
+
+.buy_button {
+  width: var(--main-width);
+  font-size: 2rem;
+  padding: 10px 30px;
+  border: g.$clr-white solid 2px;
+  background-color: rgb(g.$clr-white, 0.5);
+  border-radius: 10px;
+  @include mixins.font_color(g.$clr-shadey);
+  margin-top: 1rem;
+
+  &:hover {
+    background-color: rgb(g.$clr-white, 0.7);
+  }
+
+  &:active {
+    background-color: rgb(g.$clr-white, 0.9);
+  }
+}

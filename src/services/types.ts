@@ -26,3 +26,13 @@ export interface CartItem {
   count: number;
   price: number;
 }
+
+export interface CartElement {
+  id: string;
+  stockIndex: number;
+  name: string;
+  price: number;
+  count: number;
+  image: string;
+  variant: string;
+}

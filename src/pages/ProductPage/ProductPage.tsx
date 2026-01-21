@@ -17,7 +17,6 @@ import Carousel from "../../component/Carousel/Carousel.tsx";
 export default function ProductPage() {
   const [product, setProduct] = useState<Product | null>(null);
   const [fetchStatus, setFetchStatus] = useState(Const.FETCH_PENDING);
-  const [error, setError] = useState(null);
   const [selectedVariant, setSelectedVariant] = useState(0);
   const [maxStockReached, setMaxStockReached] = useState(false);
   const { id } = useParams();
@@ -25,7 +24,7 @@ export default function ProductPage() {
   const addItem = async () => {
     if (product === null) return;
 
-    const productStockID = createProductStockID(product, selectedVariant);
+    const productStockID = createProductStockID(product.id, selectedVariant);
     const cartItem: CartItem = {
       productStockID,
       count: 1,
@@ -33,7 +32,6 @@ export default function ProductPage() {
     };
 
     const cartCountReport = await addItemToCart(cartItem);
-    console.log(cartCountReport);
     setMaxStockReached(cartCountReport.current >= cartCountReport.maximum);
   };
 
@@ -62,13 +60,10 @@ export default function ProductPage() {
         setFetchStatus(Const.FETCH_SUCCESS);
         setProduct(p);
       })
-      .catch((err) => {
+      .catch(() => {
         setFetchStatus(Const.FETCH_FAILURE);
-        setError(err);
       });
   }, [id]);
-
-  if (error) return <main>{error}</main>;
 
   if (!product || fetchStatus !== Const.FETCH_SUCCESS) return <main />;
 
