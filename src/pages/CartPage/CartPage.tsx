@@ -9,6 +9,7 @@ import {
   createPlaceHolderCart,
   createProductStockID,
   getProductById,
+  purchaseCart,
   readProductStockID,
   subscribeToCart,
 } from "../../services/services";
@@ -19,6 +20,8 @@ import { priceFormatter } from "../../services/utils";
 export default function CartPage() {
   const [cart, setCart] = useState<Cart>(createPlaceHolderCart());
   const [cartElements, setCartElements] = useState<CartElement[]>([]);
+
+  const heading = "Your Cart" + (cartElements.length === 0 ? " is Empty" : "");
 
   useEffect(() => {
     // Subscribe to the cart!
@@ -88,12 +91,18 @@ export default function CartPage() {
 
   return (
     <main>
-      <h1 className={classes.title}>Your Cart</h1>
+      <h1 className={classes.title}>{heading}</h1>
       <div className={classes.all_elements}>
         <CartList cartElements={cartElements} modifyItem={modifyItem} />
       </div>
-      <p className={classes.price}>Total: {totalPrice()}</p>
-      <button className={classes.buy_button}>Checkout</button>
+      {cartElements.length > 0 && (
+        <>
+          <p className={classes.price}>Total: {totalPrice()}</p>
+          <button className={classes.buy_button} onClick={purchaseCart}>
+            Checkout
+          </button>
+        </>
+      )}
     </main>
   );
 }

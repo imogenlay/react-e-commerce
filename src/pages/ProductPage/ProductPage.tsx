@@ -4,7 +4,7 @@ import {
   addItemToCart,
   createProductStockID,
   getProductById,
-  updateProductById,
+  updateProductDocument,
 } from "../../services/services";
 import Const from "../../services/const.ts";
 import classes from "./ProductPage.module.scss";
@@ -44,7 +44,7 @@ export default function ProductPage() {
     if (product === null) return;
 
     const newProduct: Product = { ...product, favourite: !product?.favourite };
-    updateProductById(newProduct);
+    updateProductDocument(newProduct);
     setProduct(newProduct);
   };
 

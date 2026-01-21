@@ -64,7 +64,7 @@ export const deleteDocumentByID = async (id: string) => {
   await deleteDoc(docRef);
 };
 
-export const updateProductById = async (product: Product) => {
+export const updateProductDocument = async (product: Product) => {
   const docRef = doc(database, Const.COLLECTION_NAME, product.id);
   const { id, ...productWithoutId } = product;
   await updateDoc(docRef, productWithoutId);
@@ -189,4 +189,22 @@ export const subscribeToCart = (
   });
 
   return unsub;
+};
+
+export const purchaseCart = async () => {
+  const cart = await getCartDocument();
+  for (let i = 0; i < cart.cartItems.length; i++) {
+    const cartItem: CartItem = cart.cartItems[i];
+
+    const ids = readProductStockID(cartItem);
+    const product = await getProductById(ids.productID);
+    product.stock[ids.stockIndex].quantity -= cartItem.count;
+    if (product.stock[ids.stockIndex].quantity < 0)
+      product.stock[ids.stockIndex].quantity = 0;
+
+    updateProductDocument(product);
+  }
+
+  cart.cartItems = [];
+  updateCartDocument(cart);
 };
