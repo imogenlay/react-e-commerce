@@ -40,9 +40,7 @@ export default function ProductPage() {
 
   if (!product || fetchStatus !== Const.FETCH_SUCCESS) return <main />;
 
-  const variantNames: string[] = product.stock.map(
-    (s) => Const.IMAGE_LOCATION + s.image,
-  );
+  const variantNames: string[] = product.stock.map((s) => s.image);
 
   const getStockText = () => {
     const currentStockQuantity = product.stock[selectedVariant].quantity;

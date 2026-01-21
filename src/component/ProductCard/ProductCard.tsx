@@ -23,10 +23,7 @@ export default function ProductCard({ product }: PropsProduct) {
         <img src={`${Const.IMAGE_LOCATION}${product.stock[0].image}`} />
       </div>
 
-      <p>
-        {priceFormatter(product.price)}
-        <FavouriteStar isFavourite={product.favourite} />
-      </p>
+      <p className={classes.price}>{priceFormatter(product.price)}</p>
     </article>
   );
 }

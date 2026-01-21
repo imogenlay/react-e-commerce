@@ -15,4 +15,7 @@ export default class Const {
   static readonly FETCH_LOADING = 1;
   static readonly FETCH_SUCCESS = 2;
   static readonly FETCH_FAILURE = 3;
+
+  // Display
+  static readonly CHUNK_SIZE = 6;
 }
