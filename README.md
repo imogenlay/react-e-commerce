@@ -1,56 +1,68 @@
-# React e-cShop Website
+# React e-Shop Website
 
-## Outline
+## Overview
 
-This project is designed to reinforce your React learnings and make sure that you are comfortable with most aspect of the framework.
-With this project you will practice how to:
+A full-featured e-commerce website built with React, React Router, and Firebase Firestore.  
+The project demonstrates end-to-end frontend architecture, real-time data handling, and applied use of TypeScript.
 
-- Fetch Data within a React App
-- Use react-router
-- Use Firebase/Firestore
+---
 
-## MVP
+## Features
 
-At a minimum your e-shop website should have Three pages:
+### Home Page
 
-- Home Page
-  - This will contain:
-    - A Grid of products
-    - Carousel of featured products
-- Product Page (with id parameter) Similar to a product page on another site, allows you to add to cart and select product variants
-  - All products should be stored in Firestore:
-  - You should store the following information:
-    - quantity
-    - variants (could be colors, sizes, etc)
-    - price per unit
-    - name
-    - image url
-    - favourited or not (boolean)
-      All data should be stored in Firestore and fetched by the frontend, there should be NO static product data in the react application
-- Cart
-  - A list of all products added to the user's cart and a total price
-  - You should not be able to add more items than are in stock to the cart
-  - You may want to adjust quantity of products from the Cart page
-  - You should be able to remove products from the cart
+- Featured products carousel
+- Responsive product grid displaying all available products
+- Products fetched dynamically from Firestore (no static data)
 
-## Bonus
+---
 
-- You may want to add tests with React Testing Library
+### Product Page
 
-- You may want to use TypeScript (only if you feel very confident)
+- Dynamic routing using product ID parameters
+- Product variant selection (e.g. size, colour)
+- Stock-aware quantity selection
+- Add-to-cart functionality
+- Product data stored and retrieved from Firestore, including:
+  - Name
+  - Price per unit
+  - Available stock quantity
+  - Variants
+  - Images
+  - Favourite status
 
-- Implement Stripe "Payment" with a developer account
+---
 
-- TIPS :
+### Shopping Cart
 
-1. Make sure your site is scoped to one category of products
-2. When stripe is in test mode you can use `4242 4242 4242 4242` as a valid credit card number.
+- Persistent cart stored in Firestore
+- Real-time cart updates via Firestore subscriptions
+- Stock validation to prevent adding more items than available
+- Quantity adjustment directly from the cart
+- Remove items from the cart
+- Automatically calculated total price
 
-**IMPORTANT** - Make sure your api key is only a test key so people can't use it to actually take payment
+---
 
-- If stripe is too difficult a button that says "buy" which clears the cart and removes those items from qty is fine
+### Data & State Management
 
-## Useful links
+- Centralised cart state using React Context
+- Real-time Firestore listeners for cart updates
+- Async data fetching with derived state
+- Type-safe models using TypeScript
 
-- [React Router Docs ](https://reactrouter.com/start/declarative/installation)
-- [FireStore Docs](https://firebase.google.com/docs/firestore)
+---
+
+### Routing
+
+- Client-side routing with React Router
+- Shared context available across all routes
+- Dynamic product routes
+
+---
+
+### Extras
+
+- Written in TypeScript for improved safety and maintainability
+- Structured for easy extension (testing, auth, checkout, etc.)
+- Ready for future React Testing Library integration
