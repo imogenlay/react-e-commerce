@@ -5,6 +5,7 @@ export default class Const {
   static readonly PAGE_STORE_ID: string = "/store/:id";
   static readonly PAGE_CART_ID: string = "/store/cart";
   static readonly PAGE_CART: string = "/cart";
+  static readonly PAGE_CHECKOUT: string = "/checkout";
 
   // Database Collection
   static readonly COLLECTION_NAME: string = "react-product-store";

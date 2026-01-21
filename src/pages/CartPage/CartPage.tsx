@@ -16,10 +16,13 @@ import {
 import classes from "./CartPage.module.scss";
 import { CartList } from "../../component/CartList/CartList";
 import { priceFormatter } from "../../services/utils";
+import { useNavigate } from "react-router";
+import Const from "../../services/const";
 
 export default function CartPage() {
   const [cart, setCart] = useState<Cart>(createPlaceHolderCart());
   const [cartElements, setCartElements] = useState<CartElement[]>([]);
+  const navigate = useNavigate();
 
   const heading = "Your Cart" + (cartElements.length === 0 ? " is Empty" : "");
 
@@ -89,6 +92,11 @@ export default function CartPage() {
       ),
     );
 
+  const purchase = () => {
+    purchaseCart();
+    navigate(Const.PAGE_CHECKOUT);
+  };
+
   return (
     <main>
       <h1 className={classes.title}>{heading}</h1>
@@ -98,7 +106,7 @@ export default function CartPage() {
       {cartElements.length > 0 && (
         <>
           <p className={classes.price}>Total: {totalPrice()}</p>
-          <button className={classes.buy_button} onClick={purchaseCart}>
+          <button className={classes.buy_button} onClick={purchase}>
             Checkout
           </button>
         </>

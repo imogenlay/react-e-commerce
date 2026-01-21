@@ -63,4 +63,4 @@ The project demonstrates end-to-end frontend architecture, real-time data handli
 
 - Written in TypeScript for improved safety and maintainability
 - Structured for easy extension (testing, auth, checkout, etc.)
-- Ready for future React Testing Library integration
+- Ready for future React Testing Library integration (currently WIP)
