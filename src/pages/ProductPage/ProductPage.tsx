@@ -20,7 +20,7 @@ export default function ProductPage() {
   const [error, setError] = useState(null);
   const [selectedVariant, setSelectedVariant] = useState(0);
   const { id } = useParams();
-  const { cart, addToCart, removeFromCart } = useCart();
+  const { cart, addToCart, removeFromCart, resetCart } = useCart();
 
   const addItemToCart = () => {
     if (product === null) return;

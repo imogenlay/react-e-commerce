@@ -30,7 +30,9 @@ export default function ProductList({ products }: Props) {
       {chunks.map((chunk: Product[], i: number) => {
         return (
           <>
-            <h2 className={classes.subheading}>{headings[i]}</h2>
+            <h2 key={headings[i]} className={classes.subheading}>
+              {headings[i]}
+            </h2>
             {chunk.map((p: Product) => (
               <ProductCard key={p.id} product={p} />
             ))}

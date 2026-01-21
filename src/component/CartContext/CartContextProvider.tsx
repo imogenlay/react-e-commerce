@@ -12,6 +12,7 @@ interface CartContextType {
   cart: Cart | null;
   addToCart: (cartItem: CartItem) => void;
   removeFromCart: (cartItem: CartItem) => void;
+  resetCart: () => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -34,6 +35,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     );
 
     // Update cart data.
+    console.log("updatedCart", updatedCart);
     setCart(updatedCart);
     updateCartDocument(updatedCart);
   };
@@ -51,8 +53,9 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         break;
       }
 
-    // Item was not in cart...
+    // If item was not in cart...
     if (!wasInCart) updatedCart.cartItems.push(cartItem);
+    // Item has been added to cart.
     updateCart(updatedCart);
   };
 
@@ -67,12 +70,23 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     updateCart(updatedCart);
   };
 
+  const loadCart = async () => {
+    const cart = await getCartDocument();
+    setCart(cart);
+  };
+
   useEffect(() => {
-    getCartDocument().then((cart) => setCart(cart));
+    loadCart();
   }, []);
 
+  const resetCart = () => {
+    loadCart();
+  };
+
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart }}>
+    <CartContext.Provider
+      value={{ cart, addToCart, removeFromCart, resetCart }}
+    >
       {children}
     </CartContext.Provider>
   );
