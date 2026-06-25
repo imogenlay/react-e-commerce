@@ -1,5 +1,6 @@
 import { useState } from "react";
 import classes from "./FavouriteStar.module.scss";
+import Const from "../../services/const";
 
 interface Props {
   isFavourite: boolean;
@@ -14,9 +15,9 @@ export default function FavouriteStar({
 }: Props) {
   const [spinner, setSpinner] = useState(false);
 
-  let starSrc = "/star_empty.svg";
+  let starSrc = Const.IMAGE_LOCATION + "star_empty.svg";
   if (isFavourite) {
-    starSrc = "/star_full.svg";
+    starSrc = Const.IMAGE_LOCATION + "star_full.svg";
   }
 
   const updateStar = () => {

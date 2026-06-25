@@ -1,10 +1,13 @@
 export default class Const {
+  static readonly BASE_NAME: string = "projects/react-e-commerce";
+
   // Routes
   static readonly PAGE_HOME: string = "/";
   static readonly PAGE_STORE: string = "/store";
   static readonly PAGE_STORE_ID: string = "/store/:id";
   static readonly PAGE_CART_ID: string = "/store/cart";
   static readonly PAGE_CART: string = "/cart";
+  static readonly PAGE_DEBUG: string = "/debug";
   static readonly PAGE_CHECKOUT: string = "/checkout";
 
   // Database Collection

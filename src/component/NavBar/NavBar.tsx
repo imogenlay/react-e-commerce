@@ -14,6 +14,7 @@ export default function NavBar() {
     { to: Const.PAGE_HOME, text: "Home" },
     { to: Const.PAGE_STORE, text: "Store" },
     { to: Const.PAGE_CART, text: "Cart" },
+    { to: Const.PAGE_DEBUG, text: "@" },
   ];
 
   return (

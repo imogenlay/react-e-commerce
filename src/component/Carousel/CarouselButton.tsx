@@ -1,3 +1,4 @@
+import Const from "../../services/const";
 import classes from "./Carousel.module.scss";
 
 interface Props {
@@ -7,7 +8,7 @@ interface Props {
 
 export default function CarouselButton({ moveToIndex, left }: Props) {
   const buttonClass = left ? classes.left : classes.right;
-  const image = "/" + (left ? "left" : "right") + ".svg";
+  const image = Const.IMAGE_LOCATION + (left ? "left.svg" : "right.svg");
 
   return (
     <button onClick={moveToIndex} className={buttonClass}>

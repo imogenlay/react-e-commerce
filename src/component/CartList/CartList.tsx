@@ -26,8 +26,8 @@ export const CartList = ({ cartElements, modifyItem }: Props) => {
               </p>
               <div className={classes.button_container}>
                 <p className={classes.quantity_label}>Quantity:</p>
-                <button onClick={() => modifyItem(cartElement, +1)}>+</button>
                 <button onClick={() => modifyItem(cartElement, -1)}>-</button>
+                <button onClick={() => modifyItem(cartElement, +1)}>+</button>
                 <p>{cartElement.count}</p>
               </div>
               <p> {priceFormatter(cartElement.count * cartElement.price)}</p>

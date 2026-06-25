@@ -8,12 +8,13 @@ import ProductPage from "./pages/ProductPage/ProductPage";
 import Background from "./component/Background/Background";
 import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
 import AllProductsPage from "./pages/AllProductsPage/AllProductsPage";
+import DebugPage from "./pages/DebugPage/DebugPage";
 
 export default function App() {
   return (
     <>
       <Background />
-      <BrowserRouter>
+      <BrowserRouter basename={Const.BASE_NAME}>
         <NavBar />
         <Routes>
           <Route path={Const.PAGE_HOME} element={<HomePage />} />
@@ -22,6 +23,7 @@ export default function App() {
           <Route path={Const.PAGE_STORE} element={<AllProductsPage />} />
           <Route path={Const.PAGE_STORE_ID} element={<ProductPage />} />
           <Route path={Const.PAGE_CHECKOUT} element={<CheckoutPage />} />
+          <Route path={Const.PAGE_DEBUG} element={<DebugPage />} />
         </Routes>
       </BrowserRouter>
     </>

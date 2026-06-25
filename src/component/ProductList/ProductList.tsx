@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import Const from "../../services/const";
 import type { Product } from "../../services/types";
 import ProductCard from "../ProductCard/ProductCard";
@@ -29,14 +30,14 @@ export default function ProductList({ products }: Props) {
     <section className={classes.list}>
       {chunks.map((chunk: Product[], i: number) => {
         return (
-          <>
+          <Fragment key={chunk[0].name}>
             <h2 key={headings[i]} className={classes.subheading}>
               {headings[i]}
             </h2>
             {chunk.map((p: Product) => (
               <ProductCard key={p.id} product={p} />
             ))}
-          </>
+          </Fragment>
         );
       })}
     </section>

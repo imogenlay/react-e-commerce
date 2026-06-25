@@ -1,3 +1,4 @@
+import Const from "../../services/const";
 import type { StockItem } from "../../services/types";
 import classes from "./StockPicker.module.scss";
 
@@ -15,7 +16,10 @@ export default function StockPicker({ stock, updateVariant }: StockProps) {
       onClick={updateVariant}
     >
       {stock.quantity === 0 && (
-        <img className={classes.sold_out} src="/slash.svg" />
+        <img
+          className={classes.sold_out}
+          src={Const.IMAGE_LOCATION + "slash.svg"}
+        />
       )}
     </div>
   );
